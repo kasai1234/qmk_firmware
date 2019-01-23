@@ -1,4 +1,4 @@
-/* Copyright 2018 REPLACE_WITH_YOUR_NAME
+/* Copyright 2018 Salicylic_Acid
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,13 +26,28 @@
  * The second converts the arguments into a two-dimensional array which
  * represents the switch matrix.
  */
+/*
+ * ,------------------------------------           ------------------------------------------.
+ * | L00 | L01 | L02 | L03 | L04 | L05 |           | L06 | L07 | L08 | L09 | L0A | L0B | L0C |
+ * |------------------------------------           ------------------------------------------+
+ * | L10 | L11 | L12 | L13 | L14 | L15 |           | L16 | L17 | L18 | L19 | L1A | L1B | L1C |
+ * |------------------------------------           ------------------------------------------+
+ * | L20 | L21 | L22 | L23 | L24 | L25 |           | L26 | L17 | L28 | L29 | L2A | L2B | L2C |
+ * |-----------------------------------------------------------------------------------------+
+ *       | L30 | L32 | L33 | L34 | L35 | L36 | L37 | L38 | L39 | L3A | L3B | L3D | L3C |
+ *       |-----------------------------------------------------------------------------'
+ */
+
 #define LAYOUT( \
-    K00, K01, K02, \
-      K10,  K11   \
-) \
-{ \
-    { K00, K01,   K02 }, \
-    { K10, KC_NO, K11 }, \
+    L00, L01, L02, L03, L04, L05, L06, L07, L08, L09, L0A, L0B, L0C, \
+    L10, L11, L12, L13, L14, L15, L16, L17, L18, L19, L1A, L1B, L1C, \
+    L20, L21, L22, L23, L24, L25, L26, L27, L28, L29, L2A, L2B, L2C, \
+    L30, L31, L32, L33, L34, L35, L36, L37, L38, L39, L3A, L3B, L3C  \
+    ) { \
+  {  L00,  L01,  L02,  L03,  L04,  L05,  L06,  L07,  L08,  L09,  L0A,  L0B,  L0C  },  \
+  {  L10,  L11,  L12,  L13,  L14,  L15,  L16,  L17,  L18,  L19,  L1A,  L1B,  L1C  },  \
+  {  L20,  L21,  L22,  L23,  L24,  L25,  L26,  L27,  L28,  L29,  L2A,  L2B,  L2C  },  \
+  {  L30,  L31,  L32,  L33,  L34,  L35,  L36,  L37,  L38,  L39,  L3A,  L3B,  L3C  }   \
 }
 
 #endif
