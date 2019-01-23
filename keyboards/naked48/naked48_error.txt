@@ -1,0 +1,318 @@
+avr-gcc.exe (AVR_8_bit_GNU_Toolchain_3.6.1_1752) 5.4.0
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Compiling: keyboards/naked48/keymaps/default/keymap.c                                              keyboards/naked48/keymaps/default/keymap.c:83:15: error: implicit declaration of function 'LAYOUT_BASE_kc' [-Werror=implicit-function-declaration]
+   [_QWERTY] = LAYOUT_BASE_kc( /* Base */
+               ^
+keyboards/naked48/keymaps/default/keymap.c:85:9: error: 'TAB' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+         ^
+keyboards/naked48/keymaps/default/keymap.c:85:18: error: 'Q' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                  ^
+keyboards/naked48/keymaps/default/keymap.c:85:25: error: 'W' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                         ^
+keyboards/naked48/keymaps/default/keymap.c:85:32: error: 'E' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                ^
+keyboards/naked48/keymaps/default/keymap.c:85:39: error: 'R' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                       ^
+keyboards/naked48/keymaps/default/keymap.c:85:46: error: 'T' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                              ^
+keyboards/naked48/keymaps/default/keymap.c:85:67: error: 'Y' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                                                   ^
+keyboards/naked48/keymaps/default/keymap.c:85:74: error: 'U' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                                                          ^
+keyboards/naked48/keymaps/default/keymap.c:85:81: error: 'I' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                                                                 ^
+keyboards/naked48/keymaps/default/keymap.c:85:88: error: 'O' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                                                                        ^
+keyboards/naked48/keymaps/default/keymap.c:85:95: error: 'P' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                                                                               ^
+keyboards/naked48/keymaps/default/keymap.c:85:98: error: 'JLBRC' undeclared here (not in a function)
+         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+                                                                                                  ^
+keyboards/naked48/keymaps/default/keymap.c:87:8: error: 'LSFT' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+        ^
+keyboards/naked48/keymaps/default/keymap.c:87:18: error: 'A' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                  ^
+keyboards/naked48/keymaps/default/keymap.c:87:25: error: 'S' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                         ^
+keyboards/naked48/keymaps/default/keymap.c:87:32: error: 'D' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                ^
+keyboards/naked48/keymaps/default/keymap.c:87:39: error: 'F' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                       ^
+keyboards/naked48/keymaps/default/keymap.c:87:46: error: 'G' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                              ^
+keyboards/naked48/keymaps/default/keymap.c:87:67: error: 'H' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                                                   ^
+keyboards/naked48/keymaps/default/keymap.c:87:74: error: 'J' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                                                          ^
+keyboards/naked48/keymaps/default/keymap.c:87:81: error: 'K' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                                                                 ^
+keyboards/naked48/keymaps/default/keymap.c:87:88: error: 'L' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                                                                        ^
+keyboards/naked48/keymaps/default/keymap.c:87:92: error: 'MINS' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                                                                            ^
+keyboards/naked48/keymaps/default/keymap.c:87:98: error: 'JRBRC' undeclared here (not in a function)
+        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+                                                                                                  ^
+keyboards/naked48/keymaps/default/keymap.c:89:7: error: 'LCTRL' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+       ^
+keyboards/naked48/keymaps/default/keymap.c:89:18: error: 'Z' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                  ^
+keyboards/naked48/keymaps/default/keymap.c:89:25: error: 'X' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                         ^
+keyboards/naked48/keymaps/default/keymap.c:89:32: error: 'C' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                ^
+keyboards/naked48/keymaps/default/keymap.c:89:39: error: 'V' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                       ^
+keyboards/naked48/keymaps/default/keymap.c:89:46: error: 'B' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                              ^
+keyboards/naked48/keymaps/default/keymap.c:89:67: error: 'N' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                                                   ^
+keyboards/naked48/keymaps/default/keymap.c:89:74: error: 'M' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                                                          ^
+keyboards/naked48/keymaps/default/keymap.c:89:78: error: 'COMM' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                                                              ^
+keyboards/naked48/keymaps/default/keymap.c:89:86: error: 'DOT' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                                                                      ^
+keyboards/naked48/keymaps/default/keymap.c:89:92: error: 'SLSH' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                                                                            ^
+keyboards/naked48/keymaps/default/keymap.c:89:98: error: 'JENUN' undeclared here (not in a function)
+       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+                                                                                                  ^
+keyboards/naked48/keymaps/default/keymap.c:91:15: error: 'LEFT' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+               ^
+keyboards/naked48/keymaps/default/keymap.c:91:21: error: 'RIGHT' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                     ^
+keyboards/naked48/keymaps/default/keymap.c:91:29: error: 'LGUI' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                             ^
+keyboards/naked48/keymaps/default/keymap.c:91:36: error: 'MHEN' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                    ^
+keyboards/naked48/keymaps/default/keymap.c:91:44: error: 'LEN' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                            ^
+keyboards/naked48/keymaps/default/keymap.c:91:50: error: 'BSPC' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                  ^
+keyboards/naked48/keymaps/default/keymap.c:91:58: error: 'DEL' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                          ^
+keyboards/naked48/keymaps/default/keymap.c:91:65: error: 'RSP' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                                 ^
+keyboards/naked48/keymaps/default/keymap.c:91:71: error: 'HENK' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                                       ^
+keyboards/naked48/keymaps/default/keymap.c:91:78: error: 'LALT' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                                              ^
+keyboards/naked48/keymaps/default/keymap.c:91:87: error: 'UP' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                                                       ^
+keyboards/naked48/keymaps/default/keymap.c:91:92: error: 'DOWN' undeclared here (not in a function)
+               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+                                                                                            ^
+keyboards/naked48/keymaps/default/keymap.c:98:9: error: 'ESC' undeclared here (not in a function)
+         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+         ^
+keyboards/naked48/keymaps/default/keymap.c:98:15: error: 'EXLM' undeclared here (not in a function)
+         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+               ^
+keyboards/naked48/keymaps/default/keymap.c:98:21: error: 'JQUES' undeclared here (not in a function)
+         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+                     ^
+keyboards/naked48/keymaps/default/keymap.c:98:35: error: 'JRPRN' undeclared here (not in a function)
+         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+                                   ^
+keyboards/naked48/keymaps/default/keymap.c:98:42: error: 'JTILD' undeclared here (not in a function)
+         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+                                          ^
+keyboards/naked48/keymaps/default/keymap.c:98:91: error: 'JASTR' undeclared here (not in a function)
+         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+                                                                                           ^
+keyboards/naked48/keymaps/default/keymap.c:100:7: error: 'JQUOT' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+       ^
+keyboards/naked48/keymaps/default/keymap.c:100:15: error: 'HASH' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+               ^
+keyboards/naked48/keymaps/default/keymap.c:100:21: error: 'JDQUO' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+                     ^
+keyboards/naked48/keymaps/default/keymap.c:100:28: error: 'JLPRN' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+                            ^
+keyboards/naked48/keymaps/default/keymap.c:100:44: error: 'JAT' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+                                            ^
+keyboards/naked48/keymaps/default/keymap.c:100:63: error: 'XXXXX' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+                                                               ^
+keyboards/naked48/keymaps/default/keymap.c:100:91: error: '_____' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+                                                                                           ^
+keyboards/naked48/keymaps/default/keymap.c:100:99: error: 'JEQL' undeclared here (not in a function)
+       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+                                                                                                   ^
+keyboards/naked48/keymaps/default/keymap.c:102:8: error: 'JHAT' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+        ^
+keyboards/naked48/keymaps/default/keymap.c:102:15: error: 'PERC' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+               ^
+keyboards/naked48/keymaps/default/keymap.c:102:21: error: 'JAMPR' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+                     ^
+keyboards/naked48/keymaps/default/keymap.c:102:29: error: 'SCLN' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+                             ^
+keyboards/naked48/keymaps/default/keymap.c:102:35: error: 'JCLON' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+                                   ^
+keyboards/naked48/keymaps/default/keymap.c:102:42: error: 'JPIPE' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+                                          ^
+keyboards/naked48/keymaps/default/keymap.c:102:91: error: 'JPLUS' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+                                                                                           ^
+keyboards/naked48/keymaps/default/keymap.c:102:100: error: 'ENT' undeclared here (not in a function)
+        JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+                                                                                                    ^
+keyboards/naked48/keymaps/default/keymap.c:104:36: error: 'ZKHK' undeclared here (not in a function)
+              _____, _____, _____,  ZKHK, LOWER, _____, _____, RAISE,     0,   DOT, _____, _____ \
+                                    ^
+keyboards/naked48/keymaps/default/keymap.c:111:92: error: 'PGUP' undeclared here (not in a function)
+         ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,\
+                                                                                            ^
+keyboards/naked48/keymaps/default/keymap.c:113:8: error: 'SF11' undeclared here (not in a function)
+        SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,\
+        ^
+keyboards/naked48/keymaps/default/keymap.c:115:8: error: 'SF12' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
+        ^
+keyboards/naked48/keymaps/default/keymap.c:115:31: error: 'F8' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
+                               ^
+keyboards/naked48/keymaps/default/keymap.c:115:38: error: 'F9' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
+                                      ^
+keyboards/naked48/keymaps/default/keymap.c:115:44: error: 'F10' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
+                                            ^
+keyboards/naked48/keymaps/default/keymap.c:115:92: error: 'PGDN' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
+                                                                                            ^
+keyboards/naked48/keymaps/default/keymap.c:126:64: error: 'LTOG' undeclared here (not in a function)
+        SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
+                                                                ^
+keyboards/naked48/keymaps/default/keymap.c:126:71: error: 'LMOD' undeclared here (not in a function)
+        SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
+                                                                       ^
+keyboards/naked48/keymaps/default/keymap.c:126:86: error: 'CAD' undeclared here (not in a function)
+        SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
+                                                                                      ^
+keyboards/naked48/keymaps/default/keymap.c:126:91: error: 'APSCR' undeclared here (not in a function)
+        SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
+                                                                                           ^
+keyboards/naked48/keymaps/default/keymap.c:126:99: error: 'PSCR' undeclared here (not in a function)
+        SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
+                                                                                                   ^
+keyboards/naked48/keymaps/default/keymap.c:128:64: error: 'LVAD' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+                                                                ^
+keyboards/naked48/keymaps/default/keymap.c:128:71: error: 'LVAI' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+                                                                       ^
+keyboards/naked48/keymaps/default/keymap.c:128:78: error: 'LHUD' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+                                                                              ^
+keyboards/naked48/keymaps/default/keymap.c:128:85: error: 'LHUI' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+                                                                                     ^
+keyboards/naked48/keymaps/default/keymap.c:128:92: error: 'LSAD' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+                                                                                            ^
+keyboards/naked48/keymaps/default/keymap.c:128:99: error: 'LSAI' undeclared here (not in a function)
+        SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+                                                                                                   ^
+keyboards/naked48/keymaps/default/keymap.c: In function 'process_record_user':
+keyboards/naked48/keymaps/default/keymap.c:199:30: error: 'rgblight_config' undeclared (first use in this function)
+           RGB_current_mode = rgblight_config.mode;
+                              ^
+keyboards/naked48/keymaps/default/keymap.c:199:30: note: each undeclared identifier is reported only once for each function it appears in
+keyboards/naked48/keymaps/default/keymap.c:199:45: error: request for member 'mode' in something not a structure or union
+           RGB_current_mode = rgblight_config.mode;
+                                             ^
+keyboards/naked48/keymaps/default/keymap.c:199:28: error: assignment makes integer from pointer without a cast [-Werror=int-conversion]
+           RGB_current_mode = rgblight_config.mode;
+                            ^
+keyboards/naked48/keymaps/default/keymap.c:204:10: error: 'RGBRST' undeclared (first use in this function)
+     case RGBRST:
+          ^
+keyboards/naked48/keymaps/default/keymap.c: At top level:
+keyboards/naked48/keymaps/default/keymap.c:216:3: error: expected identifier or '(' before '}' token
+   }
+   ^
+keyboards/naked48/keymaps/default/keymap.c:217:3: error: expected identifier or '(' before 'return'
+   return true;
+   ^
+keyboards/naked48/keymaps/default/keymap.c:218:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+keyboards/naked48/keymaps/default/keymap.c: In function 'matrix_init_user':
+keyboards/naked48/keymaps/default/keymap.c:222:24: error: 'rgblight_config' undeclared (first use in this function)
+     RGB_current_mode = rgblight_config.mode;
+                        ^
+keyboards/naked48/keymaps/default/keymap.c:222:39: error: request for member 'mode' in something not a structure or union
+     RGB_current_mode = rgblight_config.mode;
+                                       ^
+keyboards/naked48/keymaps/default/keymap.c:222:22: error: assignment makes integer from pointer without a cast [-Werror=int-conversion]
+     RGB_current_mode = rgblight_config.mode;
+                      ^
+cc1.exe: all warnings being treated as errors
+ [ERRORS]
+ |
+ |
+ |
+make[1]: *** [tmk_core/rules.mk:379: .build/obj_naked48_default/keyboards/naked48/keymaps/default/keymap.o] エラー 1
+Make finished with errors
+make: *** [Makefile:544: naked48:default] エラー 1
