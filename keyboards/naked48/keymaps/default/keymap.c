@@ -14,7 +14,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-#include "keymap_jp.h"
+#include "bootloader.h"
+#ifdef PROTOCOL_LUFA
+  #include "lufa.h"
+  #include "split_util.h"
+#endif
+
+extern keymap_config_t keymap_config;
+
+#ifdef RGBLIGHT_ENABLE
+//Following line allows macro to read current RGB settings
+extern rgblight_config_t rgblight_config;
+#endif
+
+extern uint8_t is_master;
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -80,7 +93,7 @@ enum custom_keycodes {
 #define KC_APSCR LALT(KC_PSCR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT_BASE_kc( /* Base */
+  [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -93,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-  [_LOWER] = LAYOUT_BASE_kc( /* Base */
+  [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
         ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -106,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-  [_RAISE] = LAYOUT_BASE_kc( /* Base */
+  [_RAISE] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
         ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -144,13 +157,16 @@ void persistent_default_layer_set(uint16_t default_layer) {
 // Setting ADJUST layer RGB back to default
 void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
   if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
-    #ifdef RGBLIGHT_ENABLE
-      //rgblight_mode(RGB_current_mode);
-    #endif
     layer_on(layer3);
   } else {
     layer_off(layer3);
   }
+}
+
+void matrix_init_user(void) {
+    #ifdef RGBLIGHT_ENABLE
+      RGB_current_mode = rgblight_config.mode;
+    #endif
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -206,7 +222,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (record->event.pressed) {
           eeconfig_update_rgblight_default();
           rgblight_enable();
-          rgblight_mode(14);
+          RGB_current_mode = rgblight_config.mode;
         }
       #endif
       break;
@@ -217,11 +233,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-void matrix_init_user(void) {
-  #ifdef RGBLIGHT_ENABLE
-    RGB_current_mode = rgblight_config.mode;
-  #endif
-}
+
 /*
  *void matrix_scan_user(void) {
  *
