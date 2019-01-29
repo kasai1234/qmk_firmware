@@ -18,18 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include "config_common.h"
+#include <serial_config.h>
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x0000
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    Salicylic_Acid
-#define PRODUCT         naked48
-#define DESCRIPTION     A custom keyboard
+#define USE_I2C
+#define USE_SERIAL
 
-/* key matrix size */
-#define MATRIX_ROWS 4
-#define MATRIX_COLS 12
+#ifdef USE_Link_Time_Optimization
+  // LTO has issues with macros (action_get_macro) and "functions" (fn_actions),
+  //  so just disable them
+  #define NO_ACTION_MACRO
+  #define NO_ACTION_FUNCTION
 
   #define DISABLE_LEADER
 #endif // USE_Link_Time_Optimization
