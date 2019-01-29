@@ -53,7 +53,6 @@ enum custom_keycodes {
 #define KC_XXXXX KC_NO
 
 #define KC_RST   RESET
-#define KC_LRST  RGBRST
 #define KC_LTOG  RGB_TOG
 #define KC_LHUI  RGB_HUI
 #define KC_LHUD  RGB_HUD
@@ -133,6 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   [_ADJUST] = LAYOUT_BASE_kc( /* Base */
+  [_ADJUST] = LAYOUT_kc( /* Base */
   //,-----------------------------------------|             |-----------------------------------------.
         ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -217,18 +217,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       #endif
       return false;
       break;
-    case RGBRST:
-      #ifdef RGBLIGHT_ENABLE
-        if (record->event.pressed) {
-          eeconfig_update_rgblight_default();
-          rgblight_enable();
-          RGB_current_mode = rgblight_config.mode;
-        }
-      #endif
-      break;
-  }
-  return true;
-}
   }
   return true;
 }
