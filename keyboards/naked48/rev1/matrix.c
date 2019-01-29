@@ -32,11 +32,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "split_util.h"
 #include "pro_micro.h"
 
-#ifdef USE_MATRIX_I2C
+//i2c not supported
+/*#ifdef USE_MATRIX_I2C
 #  include "i2c.h"
 #else // USE_SERIAL
 #  include "split_scomm.h"
-#endif
+#endif*/
+#include "split_scomm.h"
 
 #ifndef DEBOUNCE
 #  define DEBOUNCE	5
