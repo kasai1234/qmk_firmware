@@ -131,7 +131,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-  [_ADJUST] = LAYOUT_BASE_kc( /* Base */
   [_ADJUST] = LAYOUT_kc( /* Base */
   //,-----------------------------------------|             |-----------------------------------------.
         ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,\
