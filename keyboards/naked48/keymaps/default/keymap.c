@@ -48,6 +48,8 @@ enum custom_keycodes {
 // Fillers to make layering more clear
 #define KC_LOWER LOWER
 #define KC_RAISE RAISE
+#define KC_ADJUST ADJUST
+#define KC_RESET RESET
 
 #define KC______ KC_TRNS
 #define KC_XXXXX KC_NO
@@ -64,80 +66,60 @@ enum custom_keycodes {
 #define KC_KNRM  AG_NORM
 #define KC_KSWP  AG_SWAP
 
-#define KC_JCLON KC_QUOT  // : and +
-#define KC_JAT   KC_LBRC  // @ and `
-#define KC_JHAT  KC_EQL   // ^ and ~
-#define KC_JENUN KC_RO    // \ and _ (EN mark and UNder score)
-#define KC_JENVL KC_JYEN  // \ and | (EN mark and Vertical Line)
-#define KC_JLBRC KC_RBRC  // [ and {
-#define KC_JRBRC KC_BSLS  // ] and }
-#define KC_JAMPR KC_CIRC  // &
-#define KC_JQUES LSFT(KC_SLSH)  // ?
-#define KC_JTILD LSFT(KC_EQL)  // ~
-#define KC_JQUOT LSFT(KC_7)  // '
-#define KC_JLPRN KC_ASTR  // (
-#define KC_JRPRN KC_LPRN  // )
-#define KC_JLCBR KC_RCBR  // {
-#define KC_JRCBR KC_PIPE  // }
-#define KC_JPIPE LSFT(KC_JYEN)  // |
-#define KC_JASTR LSFT(KC_QUOT)  // *
-#define KC_JEQL LSFT(KC_MINS)  // =
-#define KC_JPLUS LSFT(KC_SCLN)  // +
-#define KC_JDQUO LSFT(KC_2)  // "
-#define KC_SF11 SFT_T(KC_F11)
-#define KC_SF12 LCTL_T(KC_F12)
-#define KC_LEN LT(_LOWER, KC_ENT)
-#define KC_RSP LT(_RAISE, KC_SPC)
+
+
+#define KC_SNUBS S(KC_NUBS)
+#define KC_SNUHS S(KC_NUHS)
 #define KC_CAD LCA(KC_DEL)
 #define KC_APSCR LALT(KC_PSCR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
-        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,\
+        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P,  BSPC,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,\
+        ESC,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  SCLN,  QUOT,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,\
+       LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,   ENT,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|
-              LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN \
+            ADJUST, LCTRL,  LALT,  LGUI, LOWER,   SPC,   SPC, RAISE,  LEFT,  DOWN,    UP, RIGHT \
           //`----------------------------------------------------------------------------------'
   ),
 
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
-        ESC,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+       TILD,  EXLM,    AT,  HASH,   DLR,  PERC,                CIRC,  AMPR,  ASTR,  LPRN,  RPRN,   DEL,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-      JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
+        DEL,    F1,    F2,    F3,    F4,    F5,                  F6,  UNDS,  PLUS,  LCBR,  RCBR,  PIPE,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,\
+      _____,    F7,    F8,  F9,     F10,   F11,                 F12, SNUHS, SNUBS, _____, _____, _____,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|
-             _____, _____, _____,  ZKHK, LOWER, _____, _____, RAISE,     0,   DOT, _____, _____ \
+             _____, _____, _____, _____, _____, _____, _____, _____,  MNXT,  VOLD,  VOLU,  MPLY \
           //`----------------------------------------------------------------------------------'
   ),
 
 
   [_RAISE] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
-        ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,\
+       TILD,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,\
-  //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
+        DEL,    F1,    F2,    F3,    F4,    F5,                  F6,  MINS,   EQL,  LBRC,  RBRC,  BSLS,\
+  //|------+------+------+------+------+------|             |------+------+------+------+------+-----BSLS-|
+      _____,    F7,    F8,  F9,     F10,   F11,                 F12,  NUHS,  NUBS, _____, _____, _____,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|
-             _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____ \
+             _____, _____, _____, _____, _____, _____, _____, _____,  MNXT,  VOLD,  VOLU,  MPLY \
           //`----------------------------------------------------------------------------------'
   ),
 
 
   [_ADJUST] = LAYOUT_kc( /* Base */
   //,-----------------------------------------|             |-----------------------------------------.
-        ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,\
+      _____, RESET, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
+      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
+      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|
              _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____ \
           //`----------------------------------------------------------------------------------'
