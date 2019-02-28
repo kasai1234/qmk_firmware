@@ -34,11 +34,19 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
+#define _RAISE 4
 #define _ADJUST 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  ADJUST
+  LOWER,
+  RAISE,
+  ADJUST,
+  SEND_SUM,
+  SEND_AVERAGE,
+  SEND_COUNTIF,
+  SEND_MAX,
+  SEND_MIN
 };
 
 // Fillers to make layering more clear
@@ -61,54 +69,60 @@ enum custom_keycodes {
 #define KC_KNRM  AG_NORM
 #define KC_KSWP  AG_SWAP
 
-#define KC_JCLON KC_QUOT  // : and +
-#define KC_JAT   KC_LBRC  // @ and `
-#define KC_JHAT  KC_EQL   // ^ and ~
-#define KC_JENUN KC_RO    // \ and _ (EN mark and UNder score)
-#define KC_JENVL KC_JYEN  // \ and | (EN mark and Vertical Line)
-#define KC_JLBRC KC_RBRC  // [ and {
-#define KC_JRBRC KC_BSLS  // ] and }
-#define KC_JAMPR KC_CIRC  // &
-#define KC_JQUES LSFT(KC_SLSH)  // ?
-#define KC_JTILD LSFT(KC_EQL)  // ~
-#define KC_JQUOT LSFT(KC_7)  // '
-#define KC_JLPRN KC_ASTR  // (
-#define KC_JRPRN KC_LPRN  // )
-#define KC_JLCBR KC_RCBR  // {
-#define KC_JRCBR KC_PIPE  // }
-#define KC_JPIPE LSFT(KC_JYEN)  // |
-#define KC_JASTR LSFT(KC_QUOT)  // *
-#define KC_JEQL LSFT(KC_MINS)  // =
-#define KC_JPLUS LSFT(KC_SCLN)  // +
-#define KC_JDQUO LSFT(KC_2)  // "
-#define KC_SF11 SFT_T(KC_F11)
-#define KC_SF12 LCTL_T(KC_F12)
-#define KC_LEN LT(_LOWER, KC_ENT)
-#define KC_RSP LT(_RAISE, KC_SPC)
-#define KC_CAD LCA(KC_DEL)
+#define KC_SSUM  M(SEND_SUM)
+#define KC_SAVE  M(SEND_AVERAGE)
+#define KC_SCOU  M(SEND_COUNTIF)
+#define KC_SMAX  M(SEND_MAX)
+#define KC_SMIN  M(SEND_MIN)
+
+#define KC_LPDO LT(_LOWER, PDOT)
+#define KC_RP0 LT(_RAISE, KC_P0)
 #define KC_APSCR LALT(KC_PSCR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //|-----------------------------------------|
-         P0,    P1,    P4,    P7,   NAD,   ESC, \
+        RP0,    P1,    P4,    P7,   NAD,   ESC, \
   //|------+------+------+------+------+------|
                 P2,    P5,    P8,  PSLS,    F2, \
   //|------+------+------+------+------+------|
-       PDOT,    P3,    P6,    P9,  PAST,  PEQL, \
+       LPDO,    P3,    P6,    P9,  PAST,  PEQL, \
   //|-------------+-------------+------+------|
               PENT,         PPLS,  PMNS,   DEL  \
   //|-----------------------------------------|
   ),
 
+  [_LOWER] = LAYOUT_kc( \
+  //|-----------------------------------------|
+      RAISE,    F1,    F4,    F7,   F10,   ESC, \
+  //|------+------+------+------+------+------|
+                F2,    F5,    F8,   F11,    F2, \
+  //|------+------+------+------+------+------|
+      LOWER,    F3,    F6,    F9,   F12,  PEQL, \
+  //|-------------+-------------+------+------|
+              PENT,         PPLS,  PMNS,   DEL  \
+  //|-----------------------------------------|
+  ),
+
+  [_RAISE] = LAYOUT_kc( \
+  //|-----------------------------------------|
+      RAISE,    F1,    F4,    F7,   F10,   ESC, \
+  //|------+------+------+------+------+------|
+                F2,    F5,    F8,   F11,    F2, \
+  //|------+------+------+------+------+------|
+      LOWER,    F3,    F6,    F9,   F12,  PEQL, \
+  //|-------------+-------------+------+------|
+              PENT,         PPLS,  PMNS,   DEL  \
+  //|-----------------------------------------|
+  ),
 
   [_ADJUST] = LAYOUT_kc( /* Base */
   //|-----------------------------------------|
        LTOG,  LVAD,  LHUD,  LSAD,ADJUST, _____, \
   //|------+------+------+------+------+------|
-              LVAI,  LHUI,  LSAI, _____, _____, \
+              LVAI,  LHUI,  LSAI, XXXXX, _____, \
   //|------+------+------+------+------+------|
-      _____, _____, _____, _____, _____, _____, \
+      XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____, \
   //|-------------+-------------+------+------|
               LMOD,        _____, _____, _____  \
   //|-----------------------------------------|
@@ -148,7 +162,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-/*    case LOWER:
+    case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
@@ -168,7 +182,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-*/
     case ADJUST:
         if (record->event.pressed) {
           layer_on(_ADJUST);
@@ -186,6 +199,51 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           RGB_current_mode = rgblight_config.mode;
         }
       #endif
+      return false;
+      break;
+    case SEND_SUM:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("=SUM(");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      return false;
+      break;
+    case SEND_AVERAGE:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("=AVERAGE(");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      return false;
+      break;
+    case SEND_COUNTIF:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("=COUNTIF(");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      return false;
+      break;
+    case SEND_MAX:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("=MAX(");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      return false;
+      break;
+    case SEND_MIN:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("=MIN(");
+      } else {
+        // when keycode QMKBEST is released
+      }
       return false;
       break;
   }
