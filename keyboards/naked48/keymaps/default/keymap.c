@@ -36,7 +36,7 @@ extern uint8_t is_master;
 #define _QWERTY 0
 #define _LOWER 3
 #define _RAISE 4
-#define _ADJUST 16
+#define _ADJUST 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
-        ESC,  EXLM, JQUES, JLBRC, JRPRN, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
+        ESC,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
       JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
