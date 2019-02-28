@@ -68,6 +68,7 @@ enum custom_keycodes {
 #define KC_LMOD  RGB_MOD
 #define KC_KNRM  AG_NORM
 #define KC_KSWP  AG_SWAP
+#define KC_JRPRN KC_LPRN  // )
 
 #define KC_SSUM  M(SEND_SUM)
 #define KC_SAVE  M(SEND_AVERAGE)
@@ -94,23 +95,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //|-----------------------------------------|
-      RAISE,    F1,    F4,    F7,   F10,   ESC, \
+      RAISE,   F11,    F4,    F7,  SMIN,   ESC, \
   //|------+------+------+------+------+------|
-                F2,    F5,    F8,   F11,    F2, \
+               F12,    F5,    F8,  SMAX,    F2, \
   //|------+------+------+------+------+------|
-      LOWER,    F3,    F6,    F9,   F12,  PEQL, \
+      LOWER,    F3,    F6,    F9,  SCOU,  PEQL, \
   //|-------------+-------------+------+------|
-              PENT,         PPLS,  PMNS,   DEL  \
+             JRPRN,         SSUM,  SAVE,   DEL  \
   //|-----------------------------------------|
   ),
 
   [_RAISE] = LAYOUT_kc( \
   //|-----------------------------------------|
-      RAISE,    F1,    F4,    F7,   F10,   ESC, \
+      RAISE, XXXXX,  LEFT, XXXXX, XXXXX,   ESC, \
   //|------+------+------+------+------+------|
-                F2,    F5,    F8,   F11,    F2, \
+              DOWN,  DOWN,    UP,  PSLS,    F2, \
   //|------+------+------+------+------+------|
-      LOWER,    F3,    F6,    F9,   F12,  PEQL, \
+      LOWER, XXXXX, RIGHT, XXXXX,  PAST,  PEQL, \
   //|-------------+-------------+------+------|
               PENT,         PPLS,  PMNS,   DEL  \
   //|-----------------------------------------|
