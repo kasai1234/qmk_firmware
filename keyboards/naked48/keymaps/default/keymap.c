@@ -66,7 +66,8 @@ enum custom_keycodes {
 #define KC_KNRM  AG_NORM
 #define KC_KSWP  AG_SWAP
 
-
+#define KC_CAD LCA(KC_DEL)
+#define KC_APSCR LALT(KC_PSCR)
 
 #define KC_SNUBS S(KC_NUBS)
 #define KC_SNUHS S(KC_NUHS)
@@ -117,9 +118,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------|             |-----------------------------------------.
       _____, RESET, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
+      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
+      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|
              _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____ \
           //`----------------------------------------------------------------------------------'
