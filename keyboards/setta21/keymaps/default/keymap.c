@@ -19,6 +19,9 @@
   #include "lufa.h"
   #include "split_util.h"
 #endif
+#ifdef SSD1306OLED
+  #include "ssd1306.h"
+#endif
 
 extern keymap_config_t keymap_config;
 
@@ -70,12 +73,13 @@ enum custom_keycodes {
 #define KC_KNRM  AG_NORM
 #define KC_KSWP  AG_SWAP
 #define KC_JRPRN KC_LPRN  // )
+#define KC_JEQL LSFT(KC_MINS)  // =
 
-#define KC_SSUM  M(SEND_SUM)
-#define KC_SAVE  M(SEND_AVERAGE)
-#define KC_SCOU  M(SEND_COUNTIF)
-#define KC_SMAX  M(SEND_MAX)
-#define KC_SMIN  M(SEND_MIN)
+#define KC_SSUM  SEND_SUM
+#define KC_SAVE  SEND_AVERAGE
+#define KC_SCOU  SEND_COUNTIF
+#define KC_SMAX  SEND_MAX
+#define KC_SMIN  SEND_MIN
 
 #define KC_LPDO LT(_LOWER, KC_PDOT)
 #define KC_RP0 LT(_RAISE, KC_P0)
@@ -88,9 +92,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|
                 P2,    P5,    P8,  PSLS,    F2, \
   //|------+------+------+------+------+------|
-       SSUM,    P3,    P6,    P9,  PAST,  PEQL, \
+       LPDO,    P3,    P6,    P9,  PAST,  JEQL, \
   //|-------------+-------------+------+------|
-              SAVE,         PPLS,  PMNS,   DEL  \
+              PENT,         PPLS,  PMNS,   DEL  \
   //|-----------------------------------------|
   ),
 
@@ -100,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|
                F12,    F5,    F8,  SMAX,    F2, \
   //|------+------+------+------+------+------|
-      LOWER,    F3,    F6,    F9,  SCOU,  PEQL, \
+      LOWER,    F3,    F6,    F9,  SCOU,  JEQL, \
   //|-------------+-------------+------+------|
              JRPRN,         SSUM,  SAVE,   DEL  \
   //|-----------------------------------------|
@@ -112,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|
               DOWN,  DOWN,    UP,  PSLS,    F2, \
   //|------+------+------+------+------+------|
-      LOWER, XXXXX, RIGHT, XXXXX,  PAST,  PEQL, \
+      LOWER, XXXXX, RIGHT, XXXXX,  PAST,  JEQL, \
   //|-------------+-------------+------+------|
               PENT,         PPLS,  PMNS,   DEL  \
   //|-----------------------------------------|
@@ -131,8 +135,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-// define variables for reactive RGB
-bool TOG_STATUS = false;
 int RGB_current_mode;
 
 void persistent_default_layer_set(uint16_t default_layer) {
@@ -153,13 +155,70 @@ void matrix_init_user(void) {
     #ifdef RGBLIGHT_ENABLE
       RGB_current_mode = rgblight_config.mode;
     #endif
+    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
+    #ifdef SSD1306OLED
+        iota_gfx_init(!has_usb());   // turns on the display
+    #endif
 }
 
+//SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
+#ifdef SSD1306OLED
+
+// When add source files to SRC in rules.mk, you can use functions.
+const char *read_layer_state(void);
+const char *read_logo(void);
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+const char *read_keylog(void);
+const char *read_keylogs(void);
+
+// const char *read_mode_icon(bool swap);
+// const char *read_host_led_state(void);
+// void set_timelog(void);
+// const char *read_timelog(void);
+
+void matrix_scan_user(void) {
+   iota_gfx_task();
+}
+
+void matrix_render_user(struct CharacterMatrix *matrix) {
+  if (is_master) {
+    // If you want to change the display of OLED, you need to change here
+    matrix_write_ln(matrix, read_layer_state());
+    matrix_write_ln(matrix, read_keylog());
+    matrix_write_ln(matrix, read_keylogs());
+    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
+    //matrix_write_ln(matrix, read_host_led_state());
+    //matrix_write_ln(matrix, read_timelog());
+  } else {
+    matrix_write(matrix, read_logo());
+  }
+}
+
+void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
+  if (memcmp(dest->display, source->display, sizeof(dest->display))) {
+    memcpy(dest->display, source->display, sizeof(dest->display));
+    dest->dirty = true;
+  }
+}
+
+void iota_gfx_task_user(void) {
+  struct CharacterMatrix matrix;
+  matrix_clear(&matrix);
+  matrix_render_user(&matrix);
+  matrix_update(&display, &matrix);
+}
+#endif//SSD1306OLED
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+#ifdef SSD1306OLED
+    set_keylog(keycode, record);
+#endif
+    // set_timelog();
+  }
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
         persistent_default_layer_set(1UL<<_QWERTY);
       }
       return false;
@@ -192,7 +251,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
-      //led operations - RGB mode change now updates the RGB_current_mode to allow the right RGB mode to be set after reactive keys are released
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
@@ -205,60 +263,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case SEND_SUM:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("=SUM(");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING("_SUM*");
       }
-//      return false;
+      return false;
       break;
     case SEND_AVERAGE:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("=AVERAGE(");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING("_AVERAGE*");
       }
       return false;
       break;
     case SEND_COUNTIF:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("=COUNTIF(");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING("_COUNTIF*");
       }
       return false;
       break;
     case SEND_MAX:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("=MAX(");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING("_MAX*");
       }
       return false;
       break;
     case SEND_MIN:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("=MIN(");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING("_MIN*");
       }
       return false;
       break;
   }
   return true;
 }
-
-
-/*
- *void matrix_scan_user(void) {
- *
- *}
- *
- *void led_set_user(uint8_t usb_led) {
- *
- *}
-*/
