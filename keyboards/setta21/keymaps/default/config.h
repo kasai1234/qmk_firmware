@@ -24,7 +24,7 @@
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-// #define SSD1306OLED
+#define SSD1306OLED
 
 #define USE_SERIAL_PD2
 
