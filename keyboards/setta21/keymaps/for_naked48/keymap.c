@@ -19,6 +19,9 @@
   #include "lufa.h"
   #include "split_util.h"
 #endif
+#ifdef SSD1306OLED
+  #include "ssd1306.h"
+#endif
 
 extern keymap_config_t keymap_config;
 
@@ -34,17 +37,20 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-//#define _MACRO 2
 #define _LOWER 3
 #define _RAISE 4
 #define _ADJUST 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-//  MACRO,
   LOWER,
   RAISE,
-  ADJUST
+  ADJUST,
+  SEND_SUM,
+  SEND_AVERAGE,
+  SEND_COUNTIF,
+  SEND_MAX,
+  SEND_MIN
 };
 
 // Fillers to make layering more clear
@@ -91,65 +97,72 @@ enum custom_keycodes {
 #define KC_SF12 LCTL_T(KC_F12)
 #define KC_LEN LT(_LOWER, KC_ENT)
 #define KC_RSP LT(_RAISE, KC_SPC)
-#define KC_NAD LT(_ADJUST, KC_NLCK)
 #define KC_CAD LCA(KC_DEL)
 #define KC_APSCR LALT(KC_PSCR)
 
+#define KC_SSUM  SEND_SUM
+#define KC_SAVE  SEND_AVERAGE
+#define KC_SCOU  SEND_COUNTIF
+#define KC_SMAX  SEND_MAX
+#define KC_SMIN  SEND_MIN
+
+#define KC_RPDO LT(_RAISE, KC_PDOT)
+#define KC_LP0 LT(_LOWER, KC_P0)
+#define KC_NAD LT(_ADJUST, KC_NLCK)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT_With_Setta21_kc( \
+  [_QWERTY] = LAYOUT_for_Naked48_kc( \
   //,-----------------------------------------|             |-----------------------------------------|      |-----------------------------------------|
-        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,           P0,    P1,    P4,    P7,   NAD,   ESC, \
+        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
        LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,                  P2,    P5,    P8,  PSLS,    F2, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,         PDOT,    P3,    P6,    P9,  PAST,  PEQL, \
+      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |-------------+-------------+------+------|
               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN,                       PENT,         PPLS,  PMNS,   DEL  \
           //`----------------------------------------------------------------------------------|             |-----------------------------------------|
   ),
 
 
-  [_LOWER] = LAYOUT_With_Setta21_kc( \
+  [_LOWER] = LAYOUT_for_Naked48_kc( \
   //,-----------------------------------------|             |-----------------------------------------|      |-----------------------------------------|
-        ESC,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,        _____, _____, _____, _____, _____, _____, \
+        ESC,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,        LOWER, XXXXX,  LEFT, XXXXX, XXXXX,   ESC, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-      JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,               _____, _____, _____, _____, _____, \
+      JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,                DOWN,   DOWN,    UP,  PSLS,   F2, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-       JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,        _____, _____, _____, _____, _____, _____, \
+       JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,        RAISE, XXXXX, RIGHT, XXXXX,  PAST,  JEQL, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |-------------+-------------+------+------|
-             _____, _____, _____,  ZKHK, LOWER, _____, _____, RAISE,     0,   DOT, _____, _____,                      _____,        _____, _____, _____  \
+             _____, _____, _____,  ZKHK, LOWER, _____, _____, RAISE,     0,   DOT, _____, _____,                       PENT,         PPLS,  PMNS,   DEL  \
           //`----------------------------------------------------------------------------------|             |-----------------------------------------|
   ),
 
 
-  [_RAISE] = LAYOUT_With_Setta21_kc( \
+  [_RAISE] = LAYOUT_for_Naked48_kc( \
   //,-----------------------------------------|             |-----------------------------------------|      |-----------------------------------------|
-        ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,        _____, _____, _____, _____, _____, _____, \
+        ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,        LOWER,   F11,    F4,    F7,  SMIN,   ESC, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,               _____, _____, _____, _____, _____, \
+       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,                 F12,    F5,    F8,  SMAX,    F2, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-       SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,        _____, _____, _____, _____, _____, _____, \
+       SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,        RAISE,    F3,    F6,    F9,  SCOU,  JEQL, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |-------------+-------------+------+------|
-             _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____,                      _____,        _____, _____, _____  \
+             _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____,                      JRPRN,         SSUM,  SAVE,   DEL  \
           //`----------------------------------------------------------------------------------|             |-----------------------------------------|
   ),
 
 
-  [_ADJUST] = LAYOUT_With_Setta21_kc( /* Base */
+  [_ADJUST] = LAYOUT_for_Naked48_kc( /* Base */
   //,-----------------------------------------|             |-----------------------------------------|      |-----------------------------------------|
         ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,         LTOG,  LVAD,  LHUD,  LSAD,ADJUST, _____, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,                LVAI,  LHUI,  LSAI, _____, _____, \
+       SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,                LVAI,  LHUI,  LSAI, XXXXX, _____, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------+------+------+------|
-       SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,        _____, _____, _____, _____, _____, _____, \
+       SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,        XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |-------------+-------------+------+------|
              _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____,                       LMOD,        _____, _____, _____  \
           //`----------------------------------------------------------------------------------|             |-----------------------------------------|
   )
 };
 
-// define variables for reactive RGB
-bool TOG_STATUS = false;
 int RGB_current_mode;
 
 void persistent_default_layer_set(uint16_t default_layer) {
@@ -170,13 +183,70 @@ void matrix_init_user(void) {
     #ifdef RGBLIGHT_ENABLE
       RGB_current_mode = rgblight_config.mode;
     #endif
+    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
+    #ifdef SSD1306OLED
+        iota_gfx_init(!has_usb());   // turns on the display
+    #endif
 }
 
+//SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
+#ifdef SSD1306OLED
+
+// When add source files to SRC in rules.mk, you can use functions.
+const char *read_layer_state(void);
+const char *read_logo(void);
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+const char *read_keylog(void);
+const char *read_keylogs(void);
+
+// const char *read_mode_icon(bool swap);
+// const char *read_host_led_state(void);
+// void set_timelog(void);
+// const char *read_timelog(void);
+
+void matrix_scan_user(void) {
+   iota_gfx_task();
+}
+
+void matrix_render_user(struct CharacterMatrix *matrix) {
+  if (is_master) {
+    // If you want to change the display of OLED, you need to change here
+    matrix_write_ln(matrix, read_layer_state());
+    matrix_write_ln(matrix, read_keylog());
+    matrix_write_ln(matrix, read_keylogs());
+    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
+    //matrix_write_ln(matrix, read_host_led_state());
+    //matrix_write_ln(matrix, read_timelog());
+  } else {
+    matrix_write(matrix, read_logo());
+  }
+}
+
+void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
+  if (memcmp(dest->display, source->display, sizeof(dest->display))) {
+    memcpy(dest->display, source->display, sizeof(dest->display));
+    dest->dirty = true;
+  }
+}
+
+void iota_gfx_task_user(void) {
+  struct CharacterMatrix matrix;
+  matrix_clear(&matrix);
+  matrix_render_user(&matrix);
+  matrix_update(&display, &matrix);
+}
+#endif//SSD1306OLED
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+#ifdef SSD1306OLED
+    set_keylog(keycode, record);
+#endif
+    // set_timelog();
+  }
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
         persistent_default_layer_set(1UL<<_QWERTY);
       }
       return false;
@@ -209,7 +279,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
-      //led operations - RGB mode change now updates the RGB_current_mode to allow the right RGB mode to be set after reactive keys are released
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
@@ -220,28 +289,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       #endif
       return false;
       break;
-/*
     case SEND_SUM:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("=SUM(");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING("_SUM*");
       }
       return false;
       break;
-*/
+    case SEND_AVERAGE:
+      if (record->event.pressed) {
+        SEND_STRING("_AVERAGE*");
+      }
+      return false;
+      break;
+    case SEND_COUNTIF:
+      if (record->event.pressed) {
+        SEND_STRING("_COUNTIF*");
+      }
+      return false;
+      break;
+    case SEND_MAX:
+      if (record->event.pressed) {
+        SEND_STRING("_MAX*");
+      }
+      return false;
+      break;
+    case SEND_MIN:
+      if (record->event.pressed) {
+        SEND_STRING("_MIN*");
+      }
+      return false;
+      break;
   }
   return true;
 }
-
-
-/*
- *void matrix_scan_user(void) {
- *
- *}
- *
- *void led_set_user(uint8_t usb_led) {
- *
- *}
-*/
