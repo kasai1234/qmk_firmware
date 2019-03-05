@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* key matrix size */
 #define MATRIX_ROWS 8
-#define MATRIX_COLS 12
+#define MATRIX_COLS 14
 
 #define MATRIX_ROW_PINS { D1, D0, D4, C6 }
 
