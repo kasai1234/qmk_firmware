@@ -200,7 +200,7 @@ const char *read_keylog(void);
 const char *read_keylogs(void);
 
 // const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
+const char *read_host_led_state(void);
 // void set_timelog(void);
 // const char *read_timelog(void);
 
@@ -209,17 +209,17 @@ void matrix_scan_user(void) {
 }
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
-  if (is_master) {
-    // If you want to change the display of OLED, you need to change here
-    matrix_write_ln(matrix, read_layer_state());
-    matrix_write_ln(matrix, read_keylog());
-    matrix_write_ln(matrix, read_keylogs());
-    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
-    //matrix_write_ln(matrix, read_host_led_state());
-    //matrix_write_ln(matrix, read_timelog());
-  } else {
-    matrix_write(matrix, read_logo());
-  }
+
+  // If you want to change the display of OLED, you need to change here
+  matrix_write_ln(matrix, read_layer_state());
+  matrix_write_ln(matrix, read_keylog());
+  matrix_write_ln(matrix, read_keylogs());
+  //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
+  matrix_write_ln(matrix, read_host_led_state());
+  //matrix_write_ln(matrix, read_timelog());
+
+  // If you want to display logo instead of keylogger, comment out above and uncomment this here
+  //matrix_write(matrix, read_logo());
 }
 
 void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
