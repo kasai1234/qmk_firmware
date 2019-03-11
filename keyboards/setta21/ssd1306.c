@@ -141,15 +141,15 @@ bool iota_gfx_init(bool rotate) {
   send_cmd2(SetChargePump, 0x14 /* Enable */);
   send_cmd2(SetMemoryMode, 0 /* horizontal addressing */);
 
-  if(rotate){
+//  if(rotate){
     // the following Flip the display orientation 180 degrees
-    send_cmd1(SegRemap);
-    send_cmd1(ComScanInc);
-  }else{
+//    send_cmd1(SegRemap);
+//    send_cmd1(ComScanInc);
+//  }else{
     // Flips the display orientation 0 degrees
     send_cmd1(SegRemap | 0x1);
     send_cmd1(ComScanDec);
-  }
+//  }
 
   send_cmd2(SetComPins, 0x2);
   send_cmd2(SetContrast, 0x8f);
