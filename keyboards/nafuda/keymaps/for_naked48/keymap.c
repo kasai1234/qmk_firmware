@@ -37,12 +37,16 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
+#define _MOUSE 1
+#define _BROWSER 2
 #define _LOWER 3
 #define _RAISE 4
 #define _ADJUST 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
+  MOUSE,
+  BROWSER,
   LOWER,
   RAISE,
   ADJUST
@@ -51,6 +55,10 @@ enum custom_keycodes {
 // Fillers to make layering more clear
 #define KC_LOWER LOWER
 #define KC_RAISE RAISE
+
+#define KC_MOUSE MOUSE
+#define KC_BROWSER BROWSER
+
 #define KC_ADJUST ADJUST
 
 #define KC______ KC_TRNS
@@ -95,22 +103,21 @@ enum custom_keycodes {
 #define KC_CAD LCA(KC_DEL)
 #define KC_APSCR LALT(KC_PSCR)
 
-#define KC_SSUM  SEND_SUM
-#define KC_SAVE  SEND_AVERAGE
-#define KC_SCOU  SEND_COUNTIF
-#define KC_SMAX  SEND_MAX
-#define KC_SMIN  SEND_MIN
+#define KC_RTAB LCTL(KC_TAB)
+#define KC_LTAB LCTL(LSFT(KC_TAB))
+#define KC_CTAB LCTL(KC_W)
+#define KC_RETAB LCTL(LSFT(KC_T))
 
-#define KC_RPDO LT(_RAISE, KC_PDOT)
-#define KC_LP0 LT(_LOWER, KC_P0)
-#define KC_NAD LT(_ADJUST, KC_NLCK)
+#define KC_TGMO TG(_MOUSE)
+#define KC_TGBR TG(_BROWSER)
+#define KC_BSAD LT(_ADJUST, KC_BSPC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_for_Naked48_kc( \
   //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
-        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,                LMOD,        \
+        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,                TGMO,        \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         PGUP,    UP,  PGDN, \
+       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         BSAD,    UP,  TGBR, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,         LEFT,  DOWN, RIGHT, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |--------------------|
@@ -118,14 +125,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           //`----------------------------------------------------------------------------------|
   ),
 
+  [_MOUSE] = LAYOUT_for_Naked48_kc( \
+  //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
+        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,                TGMO,        \
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
+       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         BTN1,  MS_U,  BTN2, \
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
+      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,         MS_L,  MS_D,  MS_R, \
+  //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |--------------------|
+              LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN  \
+          //`----------------------------------------------------------------------------------|
+  ),
+
+  [_BROWSER] = LAYOUT_for_Naked48_kc( \
+  //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
+        TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,                CTAB,        \
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
+       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,        RETAB,  WH_U,  TGBR, \
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
+      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN,         LTAB,  WH_D,  RTAB, \
+  //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |--------------------|
+              LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN  \
+          //`----------------------------------------------------------------------------------|
+  ),
 
   [_LOWER] = LAYOUT_for_Naked48_kc( \
   //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
-        ESC,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,                LMOD,        \
+        ESC,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                   6,     7,     8,     9, JASTR,  SLSH,                TGMO,        \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-      JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,         PGUP,    UP,  PGDN, \
+      JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,     4,     5,     6, _____,  JEQL,         BSAD,    UP,  TGBR, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,         LEFT,  DOWN, RIGHT, \
+       JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                   0,     1,     2,     3, JPLUS,   ENT,         LEFT,  DOWN, RIGHT,  \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |--------------------|
              _____, _____, _____,  ZKHK, LOWER, _____, _____, RAISE,     0,   DOT, _____, _____  \
           //`----------------------------------------------------------------------------------|
@@ -134,11 +164,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_for_Naked48_kc( \
   //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
-        ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,                LMOD,        \
+        ESC,     1,     2,     3,     4,     5,                   6, XXXXX,    UP, XXXXX,  PGUP,  BSPC,                TGMO,        \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,         PGUP,    UP,  PGDN, \
+       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,         BSAD,    UP,  TGBR, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,         LEFT,  DOWN, RIGHT, \
+       SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,         LEFT,  DOWN, RIGHT,  \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |--------------------|
              _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____  \
           //`----------------------------------------------------------------------------------|
@@ -147,11 +177,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT_for_Naked48_kc( /* Base */
   //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
-        ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,                LMOD,        \
+        ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,                LVAD,        \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,         PGUP,    UP,  PGDN, \
+       SF11,    F1,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,       ADJUST,  LSAD,  LVAI, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,         LEFT,  DOWN, RIGHT, \
+       SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI,         LMOD,  LTOG,  LSAI, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|             |--------------------|
              _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____  \
           //`----------------------------------------------------------------------------------|
@@ -231,14 +261,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
-
-/*
- *void matrix_scan_user(void) {
- *
- *}
- *
- *void led_set_user(uint8_t usb_led) {
- *
- *}
-*/
