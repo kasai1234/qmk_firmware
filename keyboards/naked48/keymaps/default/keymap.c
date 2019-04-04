@@ -49,7 +49,6 @@ enum custom_keycodes {
 #define KC_LOWER LOWER
 #define KC_RAISE RAISE
 #define KC_ADJUST ADJUST
-#define KC_RESET RESET
 
 #define KC______ KC_TRNS
 #define KC_XXXXX KC_NO
@@ -71,8 +70,6 @@ enum custom_keycodes {
 
 #define KC_SNUBS S(KC_NUBS)
 #define KC_SNUHS S(KC_NUHS)
-#define KC_CAD LCA(KC_DEL)
-#define KC_APSCR LALT(KC_PSCR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
@@ -106,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        TILD,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,   DEL,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
         DEL,    F1,    F2,    F3,    F4,    F5,                  F6,  MINS,   EQL,  LBRC,  RBRC,  BSLS,\
-  //|------+------+------+------+------+------|             |------+------+------+------+------+-----BSLS-|
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|
       _____,    F7,    F8,  F9,     F10,   F11,                 F12,  NUHS,  NUBS, _____, _____, _____,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------|
              _____, _____, _____, _____, _____, _____, _____, _____,  MNXT,  VOLD,  VOLU,  MPLY \
@@ -116,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT_kc( /* Base */
   //,-----------------------------------------|             |-----------------------------------------.
-      _____, RESET, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
+      _____,   RST, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
       _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
