@@ -37,20 +37,21 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER 3
-#define _RAISE 4
+#define _MOUSE 1
+#define _BROWSER 2
 #define _ADJUST 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  LOWER,
-  RAISE,
+  MOUSE,
+  BROWSER,
   ADJUST
 };
 
 // Fillers to make layering more clear
-#define KC_LOWER LOWER
-#define KC_RAISE RAISE
+#define KC_MOUSE MOUSE
+#define KC_BROWSER BROWSER
+
 #define KC_ADJUST ADJUST
 
 #define KC______ KC_TRNS
@@ -67,57 +68,55 @@ enum custom_keycodes {
 #define KC_LMOD  RGB_MOD
 #define KC_KNRM  AG_NORM
 #define KC_KSWP  AG_SWAP
-#define KC_JRPRN KC_LPRN  // )
-#define KC_JEQL LSFT(KC_MINS)  // =
 
-#define KC_SSUM  SEND_SUM
-#define KC_SAVE  SEND_AVERAGE
-#define KC_SCOU  SEND_COUNTIF
-#define KC_SMAX  SEND_MAX
-#define KC_SMIN  SEND_MIN
+#define KC_RTAB LCTL(KC_TAB)
+#define KC_LTAB LCTL(LSFT(KC_TAB))
+#define KC_CTAB LCTL(KC_W)
+#define KC_RETAB LCTL(LSFT(KC_T))
 
-#define KC_LPDO LT(_LOWER, KC_PDOT)
-#define KC_RP0 LT(_RAISE, KC_P0)
-#define KC_NAD LT(_ADJUST, KC_NLCK)
+#define KC_TGMO TG(_MOUSE)
+#define KC_TGBR TG(_BROWSER)
+#define KC_BSAD LT(_ADJUST, KC_BSPC)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //|--------------------|
-              LMOD,        \
+              TGMO,        \
   //|------+------+------|
-       PGUP,    UP,  PGDN, \
-  //|------+------+------|
-       LEFT,  DOWN, RIGHT  \
-  //|--------------------|
-  ),
-
-  [_LOWER] = LAYOUT_kc( \
-  //|--------------------|
-              LMOD,        \
-  //|------+------+------|
-       PGUP,    UP,  PGDN, \
+       BSAD,    UP,  TGBR, \
   //|------+------+------|
        LEFT,  DOWN, RIGHT  \
   //|--------------------|
   ),
 
-  [_RAISE] = LAYOUT_kc( \
+  [_MOUSE] = LAYOUT_kc( \
   //|--------------------|
-              LMOD,        \
+              TGMO,        \
   //|------+------+------|
-       PGUP,    UP,  PGDN, \
+       BTN1,  MS_U,  BTN2, \
   //|------+------+------|
-       LEFT,  DOWN, RIGHT  \
+       MS_L,  MS_D,  MS_R  \
+  //|--------------------|
+  ),
+
+  [_BROWSER] = LAYOUT_kc( \
+  //|--------------------|
+              CTAB,        \
+  //|------+------+------|
+      RETAB,  WH_U,  TGBR, \
+  //|------+------+------|
+       LTAB,  WH_D,  RTAB  \
   //|--------------------|
   ),
 
   [_ADJUST] = LAYOUT_kc( /* Base */
   //|--------------------|
-              LMOD,        \
+              LVAD,        \
   //|------+------+------|
-       PGUP,    UP,  PGDN, \
+     ADJUST,  LSAD,  LVAI, \
   //|------+------+------|
-       LEFT,  DOWN, RIGHT  \
+       LMOD,  LTOG,  LSAI  \
   //|--------------------|
   )
 };
@@ -153,26 +152,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case LOWER:
-      if (record->event.pressed) {
-        layer_on(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      } else {
-        layer_off(_RAISE);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
     case ADJUST:
         if (record->event.pressed) {
           layer_on(_ADJUST);
@@ -196,13 +175,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-
-/*
- *void matrix_scan_user(void) {
- *
- *}
- *
- *void led_set_user(uint8_t usb_led) {
- *
- *}
-*/
