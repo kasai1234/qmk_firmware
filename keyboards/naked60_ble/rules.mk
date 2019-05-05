@@ -3,7 +3,7 @@ DEFAULT_FOLDER = naked60_ble/rev1
 
 NRF_DEBUG = no
 
-MOUSEKEY_ENABLE = no	# Mouse keys
+MOUSEKEY_ENABLE = yes	# Mouse keys
 EXTRAKEY_ENABLE = yes	# Audio control and System control
 CONSOLE_ENABLE = yes	# Console for debug
 COMMAND_ENABLE = yes    # Commands for debug and configuration
