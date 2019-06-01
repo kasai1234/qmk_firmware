@@ -34,15 +34,22 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
+#define _FLOCK 1
 #define _LOWER 3
 #define _RAISE 4
 #define _ADJUST 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
+  FLOCK,
   LOWER,
   RAISE,
   ADJUST
+};
+
+enum tapdances{
+  TD_ESFL = 0,
+  TD_ESQW,
 };
 
 // Fillers to make layering more clear
@@ -64,10 +71,19 @@ enum custom_keycodes {
 #define KC_SNUBS S(KC_NUBS)
 #define KC_SNUHS S(KC_NUHS)
 
+#define KC_ESFL TD(TD_ESFL)
+#define KC_ESQW TD(TD_ESQW)
+
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_ESFL] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _FLOCK),
+  [TD_ESQW] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _QWERTY),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------|             |-----------------------------------------.
-        ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  BSPC,\
+       ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  BSPC,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P,  BSLS,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
@@ -76,6 +92,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,   ENT,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
             ADJUST, LCTRL,  LALT,  LGUI, LOWER,   SPC,   SPC, RAISE,  LEFT,  DOWN,    UP, RIGHT \
+          //`----------------------------------------------------------------------------------'
+  ),
+
+
+  [_FLOCK] = LAYOUT_kc( \
+  //,-----------------------------------------|             |-----------------------------------------.
+       ESQW,    F2,    F3,    F4,    F5,    F6,                  F7,    F8,    F9,   F10,   F11, _____,\
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|
+      _____, _____, _____, _____, _____, _____,               _____, _____, _____, _____, _____, _____,\
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|
+      _____, _____, _____, _____, _____, _____,               _____, _____, _____, _____, _____, _____,\
+  //|------+------+------+------+------+------|             |------+------+------+------+------+------|
+      _____, _____, _____, _____, _____, _____,               _____, _____, _____, _____, _____, _____,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
+             _____, _____, _____, _____, _____, _____, _____, _____, _____, _____, _____, _____ \
           //`----------------------------------------------------------------------------------'
   ),
 

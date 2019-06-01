@@ -165,11 +165,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------|             |-----------------------------------------|      |--------------------|
         F11,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F12,                LVAD,        \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-      _____,   RST, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, _____,       ADJUST,  LSAD,  LVAI, \
+      _____,   RST, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX,  BTN1,  MS_U,  BTN2, XXXXX, APSCR,       ADJUST,  LSAD,  LVAI, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR,         LMOD,  LTOG,  LSAI, \
+      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX,  MS_L,  MS_D,  MS_R, XXXXX,  PSCR,         LMOD,  LTOG,  LSAI, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |--------------------|
-      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI, \
+      _____, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,   CAD, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
              _____, _____, _____, _____, LOWER, _____, _____, RAISE, _____, _____, _____, _____ \
           //`----------------------------------------------------------------------------------|
