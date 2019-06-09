@@ -36,15 +36,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COL_PINS { F4, F5, F6, F7, B1, B3, B2, D7, E6, B4, B5, D3 }
 // #define MATRIX_COL_PINS { D3, B5, B4, E6, D7, B2, B3, B1, F7, F6, F5, F4 } //uncomment this line and comment line above if you need to reverse left-to-right key order
 
-/*
-// Rows are doubled-up
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 12
-
-#define MATRIX_ROW_PINS { D2, D3, D4, C6 }
-#define MATRIX_COL_PINS { F4, F5, F6, F7, B1, B3, B2, B6, D7, E6, B4, B5 }
-*/
-
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
 
