@@ -23,13 +23,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x3060
-#define DEVICE_VER      0x0001
+#define DEVICE_VER      0x0004
 #define MANUFACTURER    Salicylic_Acid
 #define PRODUCT         setta21
 #define DESCRIPTION     A custom tenkeypad
 
 /* key matrix size */
-#define MATRIX_ROWS 8
+#define MATRIX_ROWS 10
 #define MATRIX_COLS 14
 
 #define MATRIX_ROW_PINS { D4, C6, D7, E6 }
