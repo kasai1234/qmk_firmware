@@ -36,18 +36,26 @@ extern uint8_t is_master;
 #define _QWERTY 0
 #define _MOUSE 1
 #define _BROWSER 2
-#define _LOWER 3
-#define _RAISE 4
-#define _ADJUST 5
+#define _FLOCK 3
+#define _LOWER 4
+#define _RAISE 5
+#define _ADJUST 6
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   MOUSE,
   BROWSER,
+  FLOCK,
   LOWER,
   RAISE,
   ADJUST
 };
+
+enum tapdances{
+  TD_ESFL = 0,
+  TD_ESQW,
+};
+
 
 // Fillers to make layering more clear
 #define KC_LOWER LOWER
@@ -113,46 +121,68 @@ enum custom_keycodes {
 #define KC_TGMO TG(_MOUSE)
 #define KC_TGBR TG(_BROWSER)
 
+#define KC_ESFL TD(TD_ESFL)
+#define KC_ESQW TD(TD_ESQW)
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_ESFL] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _FLOCK),
+  [TD_ESQW] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _QWERTY),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,------------------------------------------------|             |------------------------------------------------.
-       TGMO,   ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
+       TGMO,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-       TGBR,  ZKHK,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
+       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-               TAB,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
+             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,    UP,  RSFT, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-             LCTRL,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
+              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
   [_MOUSE] = LAYOUT_kc( \
   //,------------------------------------------------|             |------------------------------------------------.
-       TGMO,   ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
+       TGMO,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-       TGBR,  ZKHK,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
+      XXXXX,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-               TAB,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
+             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  BTN1,  MS_U,  BTN2, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-             LCTRL,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  MS_L,  MS_D,  MS_R  \
+              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  MS_L,  MS_D,  MS_R  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
   [_BROWSER] = LAYOUT_kc( \
   //,------------------------------------------------|             |------------------------------------------------.
-       TGMO,   ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
+      XXXXX,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-       TGBR,  ZKHK,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
+       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-               TAB,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
+             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT, RETAB,  WH_U,  CTAB, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-             LCTRL,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LTAB,  WH_D,  RTAB  \
+              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LTAB,  WH_D,  RTAB  \
+          //`-------------------------------------------------------------------------------------------------------'
+  ),
+
+  [_FLOCK] = LAYOUT_kc( \
+  //,------------------------------------------------|             |------------------------------------------------.
+       TGMO,  ESQW,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12, \
+  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
+       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
+  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
+             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
+  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
+              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,    UP,  RSFT, \
+  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
+              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
@@ -166,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                  P0,    P1,    P2,    P3, JPLUS,    UP,  RSFT, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-             LCTRL,        _____,        LOWER, _____,               _____,        RAISE,  PDOT,  LEFT,  DOWN, RIGHT  \
+              ZKHK,        _____,        LOWER, _____,               _____,        RAISE,  PDOT,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
@@ -184,12 +214,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
-
   [_ADJUST] = LAYOUT_kc( /* Base */
   //,------------------------------------------------|             |------------------------------------------------.
       _____,   RST,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-      _____,   TAB,     1,     2,     3,     4,     5,               XXXXX, XXXXX, XXXXX, XXXXX,  PGUP, XXXXX, XXXXX, \
+      _____,   TAB,     1,     2,     3,     4,     5,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               CF11, XXXXX,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR, XXXXX, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
@@ -222,6 +251,50 @@ void matrix_init_user(void) {
     #ifdef RGBLIGHT_ENABLE
       RGB_current_mode = rgblight_config.mode;
     #endif
+}
+
+uint32_t layer_state_set_user(uint32_t state) {
+  state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
+#ifdef RGBLIGHT_ENABLE
+    switch (biton32(state)) {
+    case _MOUSE:
+      setrgb(150, 0, 0, (LED_TYPE *)&led[0]);
+      setrgb(0, 0, 0, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    case _BROWSER:
+      setrgb(0, 0, 0, (LED_TYPE *)&led[0]);
+      setrgb(150, 0, 0, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    case _FLOCK:
+      setrgb(100, 100, 0, (LED_TYPE *)&led[0]);
+      setrgb(100, 100, 0, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    case _LOWER:
+      setrgb(0, 0, 150, (LED_TYPE *)&led[0]);
+      setrgb(0, 0, 150, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    case _RAISE:
+      setrgb(150, 0, 0, (LED_TYPE *)&led[0]);
+      setrgb(150, 0, 0, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    case _ADJUST:
+      setrgb(70, 70, 70, (LED_TYPE *)&led[0]);
+      setrgb(70, 70, 70, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    default: //  for any other layers, or the default layer
+      setrgb(0, 0, 0, (LED_TYPE *)&led[0]);
+      setrgb(0, 0, 0, (LED_TYPE *)&led[1]);
+      rgblight_set();
+      break;
+    }
+#endif
+return state;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
