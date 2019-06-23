@@ -253,6 +253,7 @@ void matrix_init_user(void) {
     #endif
 }
 
+//A description for expressing the layer position in LED mode.
 uint32_t layer_state_set_user(uint32_t state) {
   state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
 #ifdef RGBLIGHT_ENABLE

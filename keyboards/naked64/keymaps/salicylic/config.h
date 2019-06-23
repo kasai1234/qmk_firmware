@@ -55,8 +55,10 @@
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 0
 
 #undef RGBLED_NUM
-//#define RGBLIGHT_ANIMATIONS
 
+//Please select the LED mode.
+//The default is set to support transparent midplate.
+//#define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_EFFECT_BREATHING
 //#define RGBLIGHT_EFFECT_RAINBOW_MOOD
 //#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -67,6 +69,7 @@
 //#define RGBLIGHT_EFFECT_RGB_TEST
 //#define RGBLIGHT_EFFECT_ALTERNATING
 
+//If you do not use LED tape, set RGB_NUM to 6.
 //#define RGBLED_NUM 6
 #define RGBLED_NUM 12
 #define RGBLIGHT_LIMIT_VAL 250
