@@ -162,13 +162,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,------------------------------------------------|             |------------------------------------------------.
       XXXXX,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC, \
+       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,  PGUP, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT, \
+             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,  PGDN, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT, RETAB,  WH_U,  CTAB, \
+              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT, RETAB,    UP,  CTAB, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LTAB,  WH_D,  RTAB  \
+              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LTAB,  DOWN,  RTAB  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
@@ -210,7 +210,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN,    UP,  RSFT, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-             _____,        _____,        LOWER, _____,               _____,        RAISE, _____,  LEFT,  DOWN, RIGHT  \
+             _____,        _____,        LOWER, _____,               _____,        RAISE,  ALHE,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
@@ -224,7 +224,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
               SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI, XXXXX, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|
-               RST,        _____,        LOWER, _____,               _____,        RAISE, _____, XXXXX, XXXXX, XXXXX  \
+               RST,        _____,        LOWER, _____,               _____,        RAISE,  ALHE, XXXXX, XXXXX, XXXXX  \
           //`-------------------------------------------------------------------------------------------------------'
   )
 };
@@ -284,8 +284,8 @@ uint32_t layer_state_set_user(uint32_t state) {
       rgblight_set();
       break;
     case _ADJUST:
-      setrgb(70, 70, 70, (LED_TYPE *)&led[0]);
-      setrgb(70, 70, 70, (LED_TYPE *)&led[1]);
+      setrgb(100, 0, 100, (LED_TYPE *)&led[0]);
+      setrgb(100, 0, 100, (LED_TYPE *)&led[1]);
       rgblight_set();
       break;
     default: //  for any other layers, or the default layer

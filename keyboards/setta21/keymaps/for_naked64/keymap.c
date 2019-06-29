@@ -19,6 +19,9 @@
   #include "lufa.h"
   #include "split_util.h"
 #endif
+#ifdef SSD1306OLED
+  #include "ssd1306.h"
+#endif
 
 extern keymap_config_t keymap_config;
 
@@ -34,18 +37,12 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _MOUSE 1
-#define _BROWSER 2
-#define _FLOCK 3
-#define _LOWER 4
-#define _RAISE 5
-#define _ADJUST 6
+#define _LOWER 1
+#define _RAISE 2
+#define _ADJUST 3
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  MOUSE,
-  BROWSER,
-  FLOCK,
   LOWER,
   RAISE,
   ADJUST,
@@ -56,17 +53,10 @@ enum custom_keycodes {
   SEND_MIN
 };
 
-enum tapdances{
-  TD_ESFL = 0,
-  TD_ESQW,
-};
 
 // Fillers to make layering more clear
 #define KC_LOWER LOWER
 #define KC_RAISE RAISE
-
-#define KC_MOUSE MOUSE
-#define KC_BROWSER BROWSER
 
 #define KC_ADJUST ADJUST
 
@@ -135,72 +125,22 @@ enum tapdances{
 #define KC_LP0 LT(_LOWER, KC_P0)
 #define KC_NAD LT(_ADJUST, KC_NLCK)
 
-#define KC_ESFL TD(TD_ESFL)
-#define KC_ESQW TD(TD_ESQW)
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_ESFL] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _FLOCK),
-  [TD_ESQW] = ACTION_TAP_DANCE_DUAL_ROLE(KC_ESC, _QWERTY),
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT_With_Setta21_kc( \
+  [_QWERTY] = LAYOUT_for_Naked64_kc( \
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-       TGMO,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
-  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC,                  P2,    P5,    P8,  PSLS,    F2, \
-  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
-  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,    UP,  RSFT,                PENT,         PPLS,  PMNS,   DEL, \
-  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
-              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
-          //`-------------------------------------------------------------------------------------------------------'
-  ),
-
-  [_MOUSE] = LAYOUT_With_Setta21_kc( \
-  //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-       TGMO,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
+      XXXXX,   ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
       XXXXX,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC,                  P2,    P5,    P8,  PSLS,    F2, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
              LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  BTN1,  MS_U,  BTN2,                PENT,         PPLS,  PMNS,   DEL, \
-  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
-              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  MS_L,  MS_D,  MS_R  \
-          //`-------------------------------------------------------------------------------------------------------'
-  ),
-
-  [_BROWSER] = LAYOUT_With_Setta21_kc( \
-  //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-      XXXXX,  ESFL,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
-  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,  PGUP,                  P2,    P5,    P8,  PSLS,    F2, \
-  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,  PGDN,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
-  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT, RETAB,    UP,  CTAB,                PENT,         PPLS,  PMNS,   DEL, \
-  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
-              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LTAB,  DOWN,  RTAB  \
-          //`-------------------------------------------------------------------------------------------------------'
-  ),
-
-  [_FLOCK] = LAYOUT_With_Setta21_kc( \
-  //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-       TGMO,  ESQW,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
-  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-       TGBR,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC,                  P2,    P5,    P8,  PSLS,    F2, \
-  //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
-  //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
               LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,    UP,  RSFT,                PENT,         PPLS,  PMNS,   DEL, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
               ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
-  [_LOWER] = LAYOUT_With_Setta21_kc( \
+  [_LOWER] = LAYOUT_for_Naked64_kc( \
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
       _____,   ESC,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,        LOWER, XXXXX,  LEFT, XXXXX, XXXXX,   ESC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
@@ -214,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
-  [_RAISE] = LAYOUT_With_Setta21_kc( \
+  [_RAISE] = LAYOUT_for_Naked64_kc( \
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
       _____,   ESC,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,        LOWER,   F11,    F4,    F7,  SMIN,   ESC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
@@ -229,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-  [_ADJUST] = LAYOUT_With_Setta21_kc( /* Base */
+  [_ADJUST] = LAYOUT_for_Naked64_kc( /* Base */
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
       _____,   RST,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,        LOWER,  LVAD,  LHUD,  LSAD,ADJUST,  LTOG, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
@@ -266,58 +206,70 @@ void matrix_init_user(void) {
     #ifdef RGBLIGHT_ENABLE
       RGB_current_mode = rgblight_config.mode;
     #endif
+    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
+    #ifdef SSD1306OLED
+        iota_gfx_init(!has_usb());   // turns on the display
+    #endif
 }
 
-//A description for expressing the layer position in LED mode.
-uint32_t layer_state_set_user(uint32_t state) {
-  state = update_tri_layer_state(state, _RAISE, _LOWER, _ADJUST);
-#ifdef RGBLIGHT_ENABLE
-    switch (biton32(state)) {
-    case _MOUSE:
-      setrgb(150, 0, 0, (LED_TYPE *)&led[0]);
-      setrgb(0, 0, 0, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    case _BROWSER:
-      setrgb(0, 0, 0, (LED_TYPE *)&led[0]);
-      setrgb(150, 0, 0, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    case _FLOCK:
-      setrgb(100, 100, 0, (LED_TYPE *)&led[0]);
-      setrgb(100, 100, 0, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    case _LOWER:
-      setrgb(0, 0, 150, (LED_TYPE *)&led[0]);
-      setrgb(0, 0, 150, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    case _RAISE:
-      setrgb(150, 0, 0, (LED_TYPE *)&led[0]);
-      setrgb(150, 0, 0, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    case _ADJUST:
-      setrgb(100, 0, 100, (LED_TYPE *)&led[0]);
-      setrgb(100, 0, 100, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    default: //  for any other layers, or the default layer
-      setrgb(0, 0, 0, (LED_TYPE *)&led[0]);
-      setrgb(0, 0, 0, (LED_TYPE *)&led[1]);
-      rgblight_set();
-      break;
-    }
-#endif
-return state;
+//SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
+#ifdef SSD1306OLED
+
+// When add source files to SRC in rules.mk, you can use functions.
+const char *read_layer_state(void);
+const char *read_logo(void);
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+const char *read_keylog(void);
+const char *read_keylogs(void);
+
+// const char *read_mode_icon(bool swap);
+const char *read_host_led_state(void);
+// void set_timelog(void);
+// const char *read_timelog(void);
+
+void matrix_scan_user(void) {
+   iota_gfx_task();
 }
+
+void matrix_render_user(struct CharacterMatrix *matrix) {
+
+  // If you want to change the display of OLED, you need to change here
+  //matrix_write_ln(matrix, read_layer_state());
+  //matrix_write_ln(matrix, read_keylog());
+  //matrix_write_ln(matrix, read_keylogs());
+  //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
+  //matrix_write_ln(matrix, read_host_led_state());
+  //matrix_write_ln(matrix, read_timelog());
+
+  // If you want to display logo instead of keylogger, comment out above and uncomment this here
+  matrix_write(matrix, read_logo());
+}
+
+void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
+  if (memcmp(dest->display, source->display, sizeof(dest->display))) {
+    memcpy(dest->display, source->display, sizeof(dest->display));
+    dest->dirty = true;
+  }
+}
+
+void iota_gfx_task_user(void) {
+  struct CharacterMatrix matrix;
+  matrix_clear(&matrix);
+  matrix_render_user(&matrix);
+  matrix_update(&display, &matrix);
+}
+#endif//SSD1306OLED
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+#ifdef SSD1306OLED
+    set_keylog(keycode, record);
+#endif
+    // set_timelog();
+  }
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
         persistent_default_layer_set(1UL<<_QWERTY);
       }
       return false;
@@ -350,7 +302,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
-      //led operations - RGB mode change now updates the RGB_current_mode to allow the right RGB mode to be set after reactive keys are released
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
