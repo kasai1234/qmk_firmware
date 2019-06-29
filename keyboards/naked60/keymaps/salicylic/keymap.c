@@ -92,8 +92,8 @@ enum tapdances{
 #define KC_JEQL LSFT(KC_MINS)  // =
 #define KC_JPLUS LSFT(KC_SCLN)  // +
 #define KC_JDQUO LSFT(KC_2)  // "
-#define KC_SF11 SFT_T(KC_F11)
-#define KC_SF12 LCTL_T(KC_F12)
+#define KC_CF11 LCTL_T(KC_F11)
+#define KC_SF12 SFT_T(KC_F12)
 #define KC_LEN LT(_LOWER, KC_ENT)
 #define KC_RSP LT(_RAISE, KC_SPC)
 #define KC_CAD LCA(KC_DEL)
@@ -159,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
         ESC,     1,     2,     3,     4,     5,               XXXXX, XXXXX,    UP, XXXXX,  PGUP,  BSPC,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,\
+       CF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
         ESC,     1,     2,     3,     4,     5,               XXXXX,  BTN1,  MS_U,  BTN2, XXXXX, APSCR,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  MS_L,  MS_D,  MS_R, XXXXX,  PSCR,\
+       CF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  MS_L,  MS_D,  MS_R, XXXXX,  PSCR,\
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|
        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,   CAD,\
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
