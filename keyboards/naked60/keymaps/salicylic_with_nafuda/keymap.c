@@ -93,8 +93,8 @@ enum custom_keycodes {
 #define KC_JEQL LSFT(KC_MINS)  // =
 #define KC_JPLUS LSFT(KC_SCLN)  // +
 #define KC_JDQUO LSFT(KC_2)  // "
-#define KC_SF11 SFT_T(KC_F11)
-#define KC_SF12 LCTL_T(KC_F12)
+#define KC_CF11 LCTL_T(KC_F11)
+#define KC_SF12 SFT_T(KC_F12)
 #define KC_LEN LT(_LOWER, KC_ENT)
 #define KC_RSP LT(_RAISE, KC_SPC)
 #define KC_NAD LT(_ADJUST, KC_NLCK)
@@ -118,9 +118,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,         BSAD,    UP,  TGBR, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         LEFT,  DOWN, RIGHT, \
+      LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         LEFT,  DOWN, RIGHT, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |--------------------|
-      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN, \
+       LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN  \
           //`----------------------------------------------------------------------------------|
@@ -132,9 +132,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,         BTN1,  MS_U,  BTN2, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         MS_L,  MS_D,  MS_R, \
+      LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         MS_L,  MS_D,  MS_R, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |--------------------|
-      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN, \
+       LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN  \
           //`----------------------------------------------------------------------------------|
@@ -146,9 +146,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
         TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC,        RETAB,  WH_U,  TGBR, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       LSFT,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         LTAB,  WH_D,  RTAB, \
+      LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JRBRC,         LTAB,  WH_D,  RTAB, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |--------------------|
-      LCTRL,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN, \
+       LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH, JENUN, \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
               LEFT, RIGHT,  LGUI,  MHEN,   LEN,  BSPC,   DEL,   RSP,  HENK,  LALT,    UP,  DOWN  \
           //`----------------------------------------------------------------------------------|
@@ -175,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
         ESC,     1,     2,     3,     4,     5,               XXXXX, XXXXX,    UP, XXXXX,  PGUP,  BSPC,         BSAD,    UP,  TGBR, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,         LEFT,  DOWN, RIGHT, \
+       CF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT,  LSFT,   ENT,         LEFT,  DOWN, RIGHT, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |--------------------|
        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN, XXXXX,  \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
         ESC,     1,     2,     3,     4,     5,               XXXXX,  BTN1,  MS_U,  BTN2, XXXXX, APSCR,       ADJUST,  LSAD,  LVAI, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
-       SF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  MS_L,  MS_D,  MS_R, XXXXX,  PSCR,         LMOD,  LTOG,  LSAI, \
+       CF11,    F1,    F2,    F3,    F4,    F5,               XXXXX,  MS_L,  MS_D,  MS_R, XXXXX,  PSCR,         LMOD,  LTOG,  LSAI, \
   //|------+------+------+------+------+------|             |------+------+------+------+------+------|      |------+------+------|
        SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,   CAD,  \
   //|------+------+------+------+------+------|------+------+------+------+------+------+------+------|
