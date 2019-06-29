@@ -34,10 +34,10 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _FLOCK 3
-#define _LOWER 4
-#define _RAISE 5
-#define _ADJUST 6
+#define _FLOCK 1
+#define _LOWER 2
+#define _RAISE 3
+#define _ADJUST 4
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
