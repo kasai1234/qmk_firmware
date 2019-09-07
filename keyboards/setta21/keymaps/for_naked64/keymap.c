@@ -128,56 +128,56 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_for_Naked64_kc( \
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-      XXXXX,   ESC,     1,     2,     3,     4,     5,                   6,     7,     8,     9,     0,  MINS,  BSPC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
+        LP0,  RPDO,     1,     2,    P4,     4,    P8,                   6,  PMNS,   ESC,     9,     0,  MINS,  BSPC,          LP0,    P1,    P4,    P7,   NAD,   ESC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-      XXXXX,   TAB,     Q,     W,     E,     R,     T,                   Y,     U,     I,     O,     P, JLBRC, JRBRC,                  P2,    P5,    P8,  PSLS,    F2, \
+        LP0,  PENT,    P1,     W,    P5,     R,    P9,                   Y,     U,    F2,     O,     P, JLBRC, JRBRC,                  P2,    P5,    P8,  PSLS,    F2, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-             LCTRL,     A,     S,     D,     F,     G,                   H,     J,     K,     L,  MINS, JENUN,   ENT,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
+              PENT,    P2,     S,    P6,     F,     G,                 NAD,     J,  JEQL,     L,  MINS, JENUN,   ENT,         RPDO,    P3,    P6,    P9,  PAST,  JEQL, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              LSFT,     Z,     X,     C,     V,     B,                   N,     M,  COMM,   DOT,  SLSH,    UP,  RSFT,                PENT,         PPLS,  PMNS,   DEL, \
+              LSFT,    P3,     X,  PPLS,    P7,     B,                PSLS,     M,  BSPC,   DOT,  SLSH,    UP,  RSFT,                PENT,         PPLS,  PMNS,  BSPC, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
-              ZKHK,         GUMH,          LEN,  BSPC,                 DEL,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
+              ZKHK,         GUMH,          LEN,  BSPC,                PAST,          RSP,  ALHE,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
   [_LOWER] = LAYOUT_for_Naked64_kc( \
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-      _____,   ESC,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,        LOWER, XXXXX,  LEFT, XXXXX, XXXXX,   ESC, \
+      LOWER, RAISE,    F1,    F2,  LEFT,    F4,    UP,                  F6,  PMNS,   ESC,    F9,   F10,   F11,   F12,        LOWER, XXXXX,  LEFT, XXXXX, XXXXX,   ESC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-      _____,  QUOT,  EXLM, JQUES, JLBRC, JRBRC, JTILD,                  P6,    P7,    P8,    P9, JASTR,  SLSH, XXXXX,                DOWN,   DOWN,    UP,  PSLS,   F2, \
+      LOWER,  PENT, XXXXX, JQUES,  DOWN, JRBRC, XXXXX,                  P6, XXXXX,    F2,    P9, JASTR,  SLSH, XXXXX,                DOWN,  DOWN,    UP,  PSLS,    F2, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-             JQUOT,  HASH, JDQUO, JLPRN, JRPRN,   JAT,               XXXXX,    P4,    P5,    P6, _____,  JEQL,   ENT,        RAISE, XXXXX, RIGHT, XXXXX,  PAST,  JEQL, \
+              PENT,  DOWN, JDQUO, RIGHT, JRPRN,   JAT,               XXXXX,    P4,  JEQL,    P6, _____,  JEQL,   ENT,        RAISE, XXXXX, RIGHT, XXXXX,  PAST,  JEQL, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              JHAT,  PERC, JAMPR,  SCLN, JCLON, JPIPE,                  P0,    P1,    P2,    P3, JPLUS,    UP,  RSFT,                PENT,         PPLS,  PMNS,   DEL, \
+              JHAT, XXXXX, JAMPR,  SCLN, XXXXX, JPIPE,                PPLS,    P1,  BSPC,    P3, JPLUS,    UP,  RSFT,                PENT,         PPLS,  PMNS,  BSPC, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
-              ZKHK,        _____,          LEN, _____,               _____,          RSP,  PDOT,  LEFT,  DOWN, RIGHT  \
+              ZKHK,        _____,          LEN, _____,                PAST,          RSP,  PDOT,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
   [_RAISE] = LAYOUT_for_Naked64_kc( \
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-      _____,   ESC,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,        LOWER,   F11,    F4,    F7,  SMIN,   ESC, \
+      LOWER, RAISE,    F1,    F2,    F4,    F4,    F8,                  F6,  SAVE,   ESC,    F9,   F10,   F11,   F12,        LOWER,   F11,    F4,    F7,  SMIN,   ESC, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-      _____,   TAB,     1,     2,     3,     4,     5,               XXXXX, XXXXX,    UP, XXXXX,  PGUP, XXXXX, XXXXX,                 F12,    F5,    F8,  SMAX,    F2, \
+      LOWER, JRPRN,   F11,     2,    F5,     4,    F9,               XXXXX, XXXXX,    F2, XXXXX,  PGUP, XXXXX, XXXXX,                 F12,    F5,    F8,  SMAX,    F2, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-              CF11, XXXXX,    F2,    F3,    F4,    F5,               XXXXX,  LEFT,  DOWN, RIGHT, XXXXX, XXXXX,   ENT,        RAISE,    F3,    F6,    F9,  SCOU,  JEQL, \
+             JRPRN,   F12,    F2,    F6,    F4,    F5,                SMIN,  LEFT,  JEQL, RIGHT, XXXXX, XXXXX,   ENT,        RAISE,    F3,    F6,    F9,  SCOU,  JEQL, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              SF12,    F6,    F7,    F8,    F9,   F10,               XXXXX, XXXXX, XXXXX, XXXXX,  PGDN,    UP,  RSFT,               JRPRN,         SSUM,  SAVE,   DEL, \
+              SF12,    F3,    F7,  SSUM,    F7,   F10,                SMAX, XXXXX,  BSPC, XXXXX,  PGDN,    UP,  RSFT,               JRPRN,         SSUM,  SAVE,  BSPC, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
-             _____,        _____,        LOWER, _____,               _____,        RAISE,  ALHE,  LEFT,  DOWN, RIGHT  \
+             _____,        _____,        LOWER, _____,                SCOU,        RAISE,  ALHE,  LEFT,  DOWN, RIGHT  \
           //`-------------------------------------------------------------------------------------------------------'
   ),
 
 
   [_ADJUST] = LAYOUT_for_Naked64_kc( /* Base */
   //,------------------------------------------------|             |------------------------------------------------.      |-----------------------------------------|
-      _____,   RST,    F1,    F2,    F3,    F4,    F5,                  F6,    F7,    F8,    F9,   F10,   F11,   F12,        LOWER,  LVAD,  LHUD,  LSAD,ADJUST,  LTOG, \
+      LOWER, RAISE,    F1,    F2,  LHUD,    F4,  LSAI,                  F6, _____,  LTOG,    F9,   F10,   F11,   F12,        LOWER,  LVAD,  LHUD,  LSAD,ADJUST,  LTOG, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-      _____,   TAB,     1,     2,     3,     4,     5,               XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                LVAI,  LHUI,  LSAI, XXXXX, _____, \
+      LOWER,  LMOD,  LVAD,     2,  LHUI,     4, XXXXX,               XXXXX, XXXXX, _____, XXXXX, XXXXX, XXXXX, XXXXX,                LVAI,  LHUI,  LSAI, XXXXX, _____, \
   //|------+------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |------+------+------+------+------+------|
-              CF11, XXXXX,    F2,    F3,    F4,    F5,                LTOG,  LMOD, XXXXX,   CAD, APSCR,  PSCR, XXXXX,        RAISE, XXXXX, XXXXX, XXXXX, XXXXX, _____, \
+              LMOD,  LVAI,    F2, XXXXX,    F4,    F5,                LTOG,  LMOD, _____,   CAD, APSCR,  PSCR, XXXXX,        RAISE, XXXXX, XXXXX, XXXXX, XXXXX, _____, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-------------+-------------+------+------|
-              SF12,    F6,    F7,    F8,    F9,   F10,                LVAD,  LVAI,  LHUD,  LHUI,  LSAD,  LSAI, XXXXX,                LMOD,        _____, _____, _____, \
+              SF12, XXXXX,    F7, _____,  LSAD,   F10,                LVAD,  LVAI, _____,  LHUI,  LSAD,  LSAI, XXXXX,                LMOD,        _____, _____, _____, \
   //       |------+------+------+------+------+------|             |------+------+------+------+------+------+------|      |-----------------------------------------|
                RST,        _____,        LOWER, _____,               _____,        RAISE,  ALHE, XXXXX, XXXXX, XXXXX  \
           //`-------------------------------------------------------------------------------------------------------'
